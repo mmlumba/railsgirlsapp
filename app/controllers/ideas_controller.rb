@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
+  load_and_authorize_resource
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,6 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @idea = Idea.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +23,6 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   # GET /ideas/new.json
   def new
-    @idea = Idea.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +32,13 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
-    @idea = Idea.find(params[:id])
+
   end
 
   # POST /ideas
   # POST /ideas.json
   def create
-    @idea = Idea.new(params[:idea])
+
 
     respond_to do |format|
       if @idea.save
@@ -56,7 +54,7 @@ class IdeasController < ApplicationController
   # PUT /ideas/1
   # PUT /ideas/1.json
   def update
-    @idea = Idea.find(params[:id])
+
 
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
@@ -72,7 +70,7 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    @idea = Idea.find(params[:id])
+
     @idea.destroy
 
     respond_to do |format|
