@@ -70,15 +70,14 @@ class IdeasController < ApplicationController
   end
 
   def download
-    ideas= Idea.all
     headings=%w[name description userid]
     output=CSV.generate do |row|
       row << headings
-      ideas.each do |idea|
+      @ideas.each do |idea|
         row << [idea.name,idea.description,idea.user.email]
       end
     end
-    send_data output
+    send_data output, type: :csv, filename: 'file.csv', disposition:'attachment'
   end
 
   # DELETE /ideas/1
