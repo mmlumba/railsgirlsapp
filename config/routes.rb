@@ -1,7 +1,9 @@
 Railsgirls::Application.routes.draw do
   devise_for :users
 
-  resources :ideas
+  resources :ideas do 
+    get "download", on: :collection
+  end
   root to: "ideas#index"
 
 

@@ -1,3 +1,5 @@
+require "csv"
+
 class IdeasController < ApplicationController
   load_and_authorize_resource
   # GET /ideas
@@ -65,6 +67,18 @@ class IdeasController < ApplicationController
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def download
+    ideas= Idea.all
+    headings=%w[name description userid]
+    output=CSV.generate do |row|
+      row << headings
+      ideas.each do |idea|
+        row << [idea.name,idea.description,idea.user.email]
+      end
+    end
+    send_data output
   end
 
   # DELETE /ideas/1
